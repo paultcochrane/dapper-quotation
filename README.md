@@ -1,68 +1,38 @@
-## dapper-invoice
+## dapper-quotation
 
-A billable-time invoice featuring style over substance.
+Create dapper quotations to send to clients.
 
-![Example Screenshot](http://i.imgur.com/q78jtGu.png)
+![Example Screenshot]()
 
 ### Pre-Requisites
 
 - [TeX Live](https://www.tug.org/texlive/acquire-netinstall.html)
 
-— or —
-
-- [Vagrant](https://www.vagrantup.com/downloads.html)
-
-### Generating an Invoice
+### Generating a quotation
 
 #### Using TeX Live Locally
 
-```
-cp example.tex your-invoice-101.tex
-# make some changes to your-invoice-101.tex
-make your-invoice-101.pdf
-```
+    cp example.tex your-quote-101.tex
+    # make some changes to your-quote-101.tex
+    make your-quote-101.pdf
 
-Your invoice will be created as `your-invoice-101.pdf`
-
-#### Using Vagrant
-
-```
-cp example.tex your-invoice-101.tex
-vagrant up  # this may take a while the first time
-vagrant ssh -c 'cd /vagrant; make REPORT=your-invoice-101 watch'
-```
-
-Now whenever you make changes to `your-invoice-101.tex` on your host machine,
-the watcher inside the VM will automatically build `your-invoice-101.pdf`,
-which will be saved back to the host machine.
-
-When finished editing, input <kbd>Control</kbd>-<kbd>C</kbd> to stop the
-watcher, then run:
-
-```
-vagrant halt
-```
+Your quoteation will be created as `your-quote-101.pdf`
 
 ### Documentation
 
-See [example.tex](example.tex) and [dapper-invoice.cls](dapper-invoice.cls) for details.
+See [example.tex](example.tex) and [dapper-quotation.cls](dapper-quotation.cls) for details.
 
 ### Inspiration
 
-I am not a designer.  Inspiration for the design comes from
-stea^H^H^H^Hborrowing design ideas from good looking invoices people have
-[published on the
-net](http://www.smashingmagazine.com/2009/11/05/invoice-like-a-pro/).  The
-resulting design is not even in the same league, but I think it gets the job
-done.
-
-I am also not a LaTeX author.  The code borrows heavily from the
-[moderncv](https://launchpad.net/moderncv) package (which I can't recommend
-enough), as well as numerous other packages.
+This is a direct fork of the
+[dapper-invoice](https://github.com/mkropat/dapper-invoice) package.  It
+turns out that quotations have much in common with invoices, and since
+dapper-invoice is so nice, I thought I'd stand on the shoulders of some
+greatness instead of rolling my own.
 
 ### Licensing
 
-The code I have written I release under the MIT license.
+Released under the MIT license.
 
 Two different font packages are included in the repo for convenience:
 
