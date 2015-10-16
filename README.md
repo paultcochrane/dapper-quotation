@@ -4,9 +4,10 @@ Create dapper quotations to send to clients.
 
 ![Example Screenshot]()
 
-### Pre-Requisites
+### Prerequisites
 
-- [TeX Live](https://www.tug.org/texlive/acquire-netinstall.html)
+  - [TeX Live](https://www.tug.org/texlive/acquire-netinstall.html);
+    specifically XeLaTeX
 
 ### Generating a quotation
 
@@ -16,11 +17,12 @@ Create dapper quotations to send to clients.
     # make some changes to your-quote-101.tex
     make your-quote-101.pdf
 
-Your quoteation will be created as `your-quote-101.pdf`
+Your quotation will be created as `your-quote-101.pdf`
 
 ### Documentation
 
-See [example.tex](example.tex) and [dapper-quotation.cls](dapper-quotation.cls) for details.
+See [example.tex](example.tex) and
+[dapper-quotation.cls](dapper-quotation.cls) for details.
 
 ### Inspiration
 
@@ -34,7 +36,7 @@ greatness instead of rolling my own.
 
 Released under the MIT license.
 
-Two different font packages are included in the repo for convenience:
+Two different font packages are included in the repository for convenience:
 
 - OpenSans (Apache License v2.00)
 - Font Awesome (SIL OFL 1.1)
