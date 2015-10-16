@@ -1,44 +1,11 @@
-# Makefile forked from Mike Wilcox's resume project Makefile [1]
-#
-# [1] https://github.com/mjw56/mike-wilcox-latex-resume/blob/master/Makefile
+.PHONY: clean
 
-.SUFFIXES: .tex .pdf
+QUOTE = example
 
-.PHONEY : default install uninstall clean pdf watch
+default: $(QUOTE).pdf
 
-REPORT = example
-SHOW = $(REPORT)
-
-$(REPORT).pdf: $(REPORT).tex dapper-invoice.cls
-
-default: pdf
-
-pdf: $(REPORT:%=%.pdf)
-
-.tex.pdf:
-	xelatex $* && xelatex $*
-
-watch: pdf
-	@echo watching \'$(SHOW).tex\' to run \'$(MAKE) pdf\'
-	@ruby -e "file = '$(SHOW).tex'" \
-		-e "command = '$(MAKE) pdf'" \
-		-e "lm = File.mtime file" \
-		-e "while true do" \
-		-e " m = File.mtime file" \
-		-e " system command unless m==lm" \
-		-e " lm = m" \
-		-e " sleep 0.25" \
-		-e "end"
-
-install: dapper-invoice.cls
-	mkdir -p "$$(kpsewhich -expand-var '$$TEXMFHOME')/tex/latex/base"
-	cp -a $? "$$(kpsewhich -expand-var '$$TEXMFHOME')/tex/latex/base/"
-
-uninstall:
-	rm -f "$$(kpsewhich -expand-var '$$TEXMFHOME')/tex/latex/base/dapper-invoice.cls"
+$(QUOTE).pdf: $(QUOTE).tex dapper-quotation.cls
+	xelatex $< && xelatex $<
 
 clean:
-	rm -rf $(REPORT:%=%.aux) $(REPORT:%=%.bbl) $(REPORT:%=%.blg)
-	rm -rf $(REPORT:%=%.log) $(REPORT:%=%.toc) $(REPORT:%=%.dvi)
-	rm -rf $(REPORT:%=%.ind) $(REPORT:%=%.ilg) $(REPORT:%=%.nls)
-	rm -rf $(REPORT:%=%.nlo) $(REPORT:%=%.out)
+	rm -rf *.aux *.log *.out $(QUOTE).pdf
