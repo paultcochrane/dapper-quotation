@@ -1,16 +1,17 @@
-\documentclass[letterpaper]{dapper-quotation}
-%\documentclass[letterpaper,currency=dollar]{dapper-quotation}
-%\documentclass[letterpaper,currency=euro]{dapper-quotation}
-%\documentclass[letterpaper,currency=pound]{dapper-quotation}
+\documentclass[a4paper]{dapper-quotation}
+%\documentclass[a4paper,currency=dollar]{dapper-quotation}
+%\documentclass[a4paper,currency=euro]{dapper-quotation}
+%\documentclass[a4paper,currency=pound]{dapper-quotation}
 
-\newcommand{\invoiceNo}{101}
+\newcommand{\quotationNumber}{101}
 \newcommand{\balance}{137.50}
 \newcommand{\duein}{15}% days
 
 \newcommand{\me}{Your~Name}
 \newcommand{\clientName}{Sample~Client}
+\newcommand{\customerNumber}{314}
 
-\setmetadata{\me}{Your Biz}{\invoiceNo}{\clientName}
+\setmetadata{\me}{Your Biz}{\quotationNumber}{\clientName}
 
 \defaultfontfeatures{ Path = ./Fonts/ }
 \usepackage{fontawesome}
@@ -18,25 +19,22 @@
 \begin{document}
 
 \newfontface\mainLightItalic{OpenSans-LightItalic}
-\makeheader{Your\ \mainLightItalic Biz}{\invoiceNo}
+\makeheader{Your\ \mainLightItalic Biz}{\quotationNumber}
 
 \twocolumnlayout{
     \begin{infoSection}
         \infoBox{Client}{\clientName \\
                          123 Street Address \\
                          City, State 55555 }
+	\infoBox{Customer number}{\customerNumber}
         \infoBox{Project}{\#123.456}
         \infoBox{Contact}{Jane Smith}
         \infoSub{\faMobilePhone}{\small\slshape +1~(555)~555-5555}
         \noalign{\addvspace{8ex}}
-        \infoBox{}{
-            {\large\raisebox{.55\height}\currencysym\huge\formatcurrency{\balance} \arrowbase} \\
-            {\small\color{subduedColor} due \duedate{\duein}}
-        }
     \end{infoSection}
 }{
     \begin{infoSection}
-        \infoBox{\arrowtarget Payable To}{
+        \infoBox{}{
             \me \\
             1234 Sycamore Ave \\
             Blacksburg, VA 24060
@@ -46,28 +44,27 @@
     \end{infoSection}
 }
 
-\drawarrow
-
 \addvspace{4ex}
 
-\begin{hoursItemizationWithProject}
+\newcommand{\quotationSubtotal}{1234}
+\newcommand{\quotationTotal}{1234}
+\begin{quotationItems}
 
-    \lineitemp{2015/4/11}{2}{50}{Invoice}{
-        \item Discussed requirements with client}
+    % Pos Bezeichnung Anzahl Stückpreis Gesamtpreis Brutto
 
-    \lineitemp{2015/4/11}{1.25}{50}{Invoice}{
-        \item Wrote Invoice in LaTeX}
+    \lineitem{1}{\item Write a quotation in \LaTeX{}}{2}{50}
 
-    \lineitemp{2015/4/11}{0.5}{50}{Invoice}{
-        \item Packaged Invoice in .cls file}
+    \lineitem{2}{\item Document code}{1.25}{50}
+
+    \lineitem{3}{\item Teach customer how to use package}{0.5}{50}
 
     \beginsummary
 
-    \summaryline{Total}{\currencysym\formatcurrency{\InvoiceTotal}}
+    \summaryline{Subtotal}{\currencysym\formatcurrency{\quotationSubtotal}}
 
-    \summaryline{Paid}{\currencysym\formatcurrency{50}}
-    \summaryline{Balance Due}{\currencysym\formatcurrency{\balance}} % not really any math support (yet)
+    \summaryline{VAT 19\%}{\currencysym\formatcurrency{50}}
+    \summaryline{Total}{\currencysym\formatcurrency{\quotationTotal}} % not really any math support (yet)
 
-\end{hoursItemizationWithProject}
+\end{quotationItems}
 
 \end{document}

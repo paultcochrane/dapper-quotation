@@ -1,6 +1,6 @@
-% dapper-invoice.cls -- a billable-hours invoice featuring style over substance
+% dapper-quotation.cls -- Dapper looking quotations to send to clients
 
-\ProvidesClass{dapper-invoice}[2015/04/12]
+\ProvidesClass{dapper-quotation}[2015/04/12]
 \NeedsTeXFormat{LaTeX2e}
 \LoadClass[11pt]{article}
 
@@ -77,9 +77,9 @@
         bookmarksopen  = false,
         bookmarksdepth = 2,% to show sections and subsections
         pdfauthor      = {#1},
-        pdftitle       = {#2 --- Invoice \##3 for #4},
-        pdfsubject     = {Invoice \##3},
-        pdfkeywords    = {invoice, #2, #4}
+        pdftitle       = {#2 --- Quotation \##3 for #4},
+        pdfsubject     = {Quotation \##3},
+        pdfkeywords    = {quotation, #2, #4}
     }
 }
 
@@ -92,7 +92,7 @@
     \begin{minipage}[t]{.6\linewidth} {\headerStyle #1} \end{minipage}
     \hfill
     \begin{tabular}[t]{@{} c @{}}
-        {\headerStyle \invoiceSpacing{INVOICE} \##2} \\
+        {\headerStyle \invoiceSpacing{QUOTATION} \##2} \\
         {\color{subduedColor} \today}
     \end{tabular}
 
@@ -129,40 +129,14 @@
 
 \newcounter{colskipcount}
 
-\newenvironment{hoursItemization}{
+\newenvironment{quotationItems}{
     \setcounter{colskipcount}{5}
     \setlength\LTleft{0pt}
     \setlength\LTright{0pt}
     \begin{longtable}{c @{\hspace{1.5em}} p{.6\textwidth} r @{} l r r}
     \hline
     \noalign{\smallskip}
-    {\itemizationHeaderStyle Date} &
-    {\itemizationHeaderStyle Description} &
-    \multicolumn{2}{l}{\itemizationHeaderStyle Hours} &
-    {\itemizationHeaderStyle Rate} &
-    {\itemizationHeaderStyle Amount}
-    \\
-    \noalign{\smallskip}
-    \hline
-    \noalign{\bigskip}
-    \endhead
-    \noalign{\bigskip}
-    \hline
-    \endfoot
-    \endlastfoot
-}{
-    \end{longtable}
-}
-
-\newenvironment{hoursItemizationWithProject}{
-    \setcounter{colskipcount}{6}
-    \setlength\LTleft{0pt}
-    \setlength\LTright{0pt}
-    \begin{longtable}{c c @{\hspace{1.5em}} p{.5\textwidth} r @{} l r r}
-    \hline
-    \noalign{\smallskip}
-    {\itemizationHeaderStyle Date} &
-    {\itemizationHeaderStyle Project} &
+    {\itemizationHeaderStyle Item No.} &
     {\itemizationHeaderStyle Description} &
     \multicolumn{2}{l}{\itemizationHeaderStyle Hours} &
     {\itemizationHeaderStyle Rate} &
@@ -218,26 +192,14 @@
 \newcommand{\lineitem}[4]{
     {\itemizationRowStyle #1} &
     \begin{minipage}[t]{.6\textwidth}
-        \begin{itemize}[leftmargin=0pt, labelsep=1pt, itemsep=0pt] \itemizationRowStyle #4 \end{itemize}
+        \begin{itemize}[leftmargin=0pt, labelsep=1pt, itemsep=0pt]
+	    \itemizationRowStyle #2
+	\end{itemize}
     \end{minipage} &
-    {\itemizationRowStyle \@formatHoursLeft{#2}} &
-    {\itemizationRowStyle \@formatHoursRight{#2}} &
-    {\itemizationRowStyle \currencysym#3} &
-    {\itemizationRowStyle \currencysym\calcamount{#2}{#3}}
-    \\
-    \noalign{\medskip}
-}
-
-\newcommand{\lineitemp}[5]{
-    {\itemizationRowStyle #1} &
-    {\itemizationRowStyle #4} &
-    \begin{minipage}[t]{0.5\textwidth}
-        \begin{itemize}[leftmargin=0pt, labelsep=1pt, itemsep=0pt] \itemizationRowStyle #5 \end{itemize}
-    \end{minipage} &
-    {\itemizationRowStyle \@formatHoursLeft{#2}} &
-    {\itemizationRowStyle \@formatHoursRight{#2}} &
-    {\itemizationRowStyle \currencysym#3} &
-    {\itemizationRowStyle \currencysym\calcamount{#2}{#3}}
+    {\itemizationRowStyle \@formatHoursLeft{#3}} &
+    {\itemizationRowStyle \@formatHoursRight{#3}} &
+    {\itemizationRowStyle \currencysym#4} &
+    {\itemizationRowStyle \currencysym\calcamount{#3}{#4}}
     \\
     \noalign{\medskip}
 }
